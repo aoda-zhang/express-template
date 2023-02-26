@@ -17,5 +17,5 @@ app.use('*', async (req, res) => {
 const PORT = process.env.PORT ?? 8080
 app.listen(PORT, () => {
   // 开发环境说明
-  console.log(`本地开发运行在: http://localhost:${PORT}`, 'color:red')
+  console.log(`本地开发运行在: http://localhost:${PORT}`)
 })
