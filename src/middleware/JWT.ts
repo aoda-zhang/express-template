@@ -1,7 +1,7 @@
 import { Express } from 'express'
 import { expressjwt } from 'express-jwt'
 import { noTokenRouters } from '../routes'
-export const SCRECT_KEY = 'aoda_backend'
+const SCRECT_KEY = process.env.SCRECT_KEY ?? ''
 
 const jwtAuth = (app: Express) => {
   app.use(
