@@ -6,12 +6,15 @@ import usersRouters from '../modules/users/route'
 export const noTokenRouters = ['/login', '/welcome']
 const initRouter = (app: Express) => {
   const PREFIX = process?.env?.PREFIX ?? '/api'
-  // const path = require('path')
-  // app.use('/', express.static(path.join(__dirname, 'public')))
-  // app.use(app.use(express.static('public')))
-  app.use(express.static('public'))
-  // 全局路由前缀+路由中间件
+  const path = require('path')
   const routeRender: Router[] = [loginRoute, goodsRouters, usersRouters]
+  app.use(express.static(path.join(__dirname, 'public')))
+  app.get('/', (req, res) => {
+    res.send('默认页面')
+  })
+  // app.use(express.static('/public'))
+  // 全局路由前缀+路由中间件
+
   app.use(PREFIX, routeRender)
   app.use('*', async (req, res) => {
     // 跳转默认路由
