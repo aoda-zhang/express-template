@@ -1,9 +1,9 @@
 import { Express } from 'express'
 import { expressjwt } from 'express-jwt'
 import { noTokenRouters } from '../routes'
-const SCRECT_KEY = process.env.SCRECT_KEY ?? ''
 
-const jwtAuth = (app: Express) => {
+const jwtToken = (app: Express) => {
+  const SCRECT_KEY = process.env.SCRECT_KEY ?? ''
   app.use(
     expressjwt({
       secret: SCRECT_KEY,
@@ -11,4 +11,4 @@ const jwtAuth = (app: Express) => {
     }).unless({ path: noTokenRouters }) // 无需验证token的路由
   )
 }
-export default jwtAuth
+export default jwtToken
