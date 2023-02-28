@@ -1,18 +1,17 @@
 import express from 'express'
 import renderENVConfig from '../config/env'
 import initMiddleware from './middleware'
+import initRouter from './routes'
 // import connectDataBase from './middleware/dataBaseConnect'
 const app = express()
 // 加载环境变量
 renderENVConfig()
+// 加载路由
+initRouter(app)
 // 挂载中间件
 initMiddleware(app)
 // 数据库连接
 // connectDataBase()
-app.use('*', async (req, res) => {
-  // 默认跳转欢迎页面
-  // res.redirect(301, '/welcome')
-})
 
 const PORT = process.env.PORT ?? 8080
 app.listen(PORT, () => {
