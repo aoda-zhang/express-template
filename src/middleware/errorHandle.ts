@@ -1,4 +1,4 @@
-const errorHandler = (
+const errorHandle = (
   err: { name: string },
   req: any,
   res: {
@@ -20,4 +20,4 @@ const errorHandler = (
     message
   })
 }
-export default errorHandler
+export default errorHandle

@@ -1,6 +1,6 @@
 import { Express } from 'express'
 import { expressjwt } from 'express-jwt'
-import { noTokenRouters } from '../routes'
+import { noTokenRouters } from '../loaders/init-router'
 
 const jwtToken = (app: Express) => {
   const SCRECT_KEY = process.env.SCRECT_KEY ?? ''

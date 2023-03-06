@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const connectDataBase = () => {
+const connectDB = () => {
   const dataBaseURL = process.env.DATABASE_URL ?? ''
   mongoose.connect(dataBaseURL)
   const dataBaseConnectState = mongoose.connection
@@ -13,4 +13,4 @@ const connectDataBase = () => {
     console.log('数据库断开连接')
   })
 }
-export default connectDataBase
+export default connectDB
