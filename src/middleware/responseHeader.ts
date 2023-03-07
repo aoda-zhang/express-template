@@ -11,7 +11,7 @@ const responseHeader = (req: Request, res: Response, next: NextFunction) => {
   // 允许公开的头部字段
   res.header('Access-Control-Expose-Headers', 'Content-Disposition')
   // 允许的请求方式
-  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
   // 允许携带cookie
   res.header('Access-Control-Allow-Credentials', 'true')
 
