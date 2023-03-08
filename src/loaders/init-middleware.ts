@@ -7,6 +7,6 @@ const initMiddleware = (app: Express) => {
   app.use(helmet())
   app.use(middleware.responseHeader)
   // 先鉴权，再加载路由
-  middleware.jwtToken(app)
+  // middleware.jwtToken(app)
 }
 export default initMiddleware

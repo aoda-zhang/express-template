@@ -1,9 +1,8 @@
 {
   "name": "full-stack-back",
-  "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/app.ts",
-    "start": "node src/app.ts",
+    "start": "ts-node src/app.ts",
     "build": "cross-env NODE_ENV=production npx tsc -p tsconfig.json",
     "server": "nodemon ./dist/bin/www",
     "lint": "eslint src --ext .ts,.js --fix"
