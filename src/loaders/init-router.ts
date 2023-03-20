@@ -1,11 +1,11 @@
 import express, { Router, Express } from 'express'
 import path from 'path'
-import goodsRouters from '../modules/goods/api'
+import goodsRouters from '../modules/goods/router'
 import loginRoute from '../modules/login/route'
 import usersRouters from '../modules/users/route'
 const PREFIX = process?.env?.PREFIX ?? '/api'
 // 无token路由
-export const noTokenRouters = ['/', `${PREFIX}/goods/:id`, `${PREFIX}/login`]
+export const noTokenRouters = ['/', `/${PREFIX}/goods/`, `/${PREFIX}/login/`]
 // 各模块注册路由
 const routeRender: Router[] = [loginRoute, goodsRouters, usersRouters]
 const initRouter = (app: Express) => {
