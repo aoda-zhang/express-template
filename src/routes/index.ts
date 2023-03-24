@@ -15,7 +15,7 @@ const initRouter = (app: Express) => {
   app.use(PREFIX, routeRender)
   app.use('*', (req, res) => {
     // 默认跳转页面，一般为site首页
-    res.sendFile(path.resolve('views/index.html'))
+    res.sendFile(path.resolve('assets/views/index.html'))
   })
 }
 export default initRouter
