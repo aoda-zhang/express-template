@@ -4,28 +4,20 @@
     {
       "type": "node",
       "request": "launch",
-      "console": "externalTerminal",
+      "console": "internalConsole",
       "name": "调试express",
-      "protocol": "inspector",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": ["node_modules/**"],
       // 项目的入口文件
-      "args": ["${workspaceRoot}/fullStack/back-End/src/app.ts"],
+      "args": ["${workspaceRoot}/src/app.ts"],
       // 将ts转换为js的配置，需要找到自己安装ts-node的绝对路径
-      "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "./fullStack/back-End/node_modules/ts-node/register"
-      ],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "sourceMaps": true,
       "restart": true,
       "cwd": "${workspaceRoot}",
       "internalConsoleOptions": "neverOpen",
       "autoAttachChildProcesses": true,
-      "env": {
-        "PORT": "2826"
-      },
       // 本地开发使用的环境变量文件
-      "envFile": "${workspaceFolder}/fullStack/back-End/config/env/development.env"
+      "envFile": "${workspaceFolder}/config/env/development.env"
     }
   ]
 }

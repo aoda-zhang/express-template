@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
+import envConfig from '../../config/env'
 const DBConnection = () => {
-  const dataBaseURL = process.env.DATABASE_URL ?? ''
-  mongoose.connect(dataBaseURL)
+  mongoose.connect(envConfig?.DATABASE_URL ?? '')
   const dataBaseConnectState = mongoose.connection
   dataBaseConnectState.on('error', (error: any) => {
     console.error(`数据库连接出错:${error}`)
