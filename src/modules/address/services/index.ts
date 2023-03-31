@@ -1,12 +1,31 @@
+import { AddressType } from './../../../models/address'
 import AddressModal from '../../../models/address'
+import { ParsedQs } from 'qs'
 class AddressService {
   // 增
+  addAddress = async (
+    data: string | string[] | ParsedQs | ParsedQs[] | undefined
+  ) => {
+    try {
+      await new AddressModal(data).save()
+    } catch (error) {
+      throw Error('灭蝇')
+    }
+  }
   // AddressModal.save()
   // 删
   // 查
-  getAddress = async (id: String) => {
+
+  // 查询所有文档数据
+  getAddress = async (id: string) => {
+    if (id) {
+      return await AddressModal.findById(id)
+    }
     return await AddressModal.find()
   }
+
+  // 查询单个文档数据
+
   // 改
 }
 const addressService = new AddressService()

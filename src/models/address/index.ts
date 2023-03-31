@@ -1,10 +1,17 @@
-import mongoose from 'mongoose'
-const Schema = mongoose.Schema
+import { Schema, model } from 'mongoose'
+import { DBCollection } from '../../constant/enum/DBCollection'
+export interface AddressType {
+  value: string
+}
 const AddressSchema = new Schema({
   value: {
     type: String,
     require: true
   }
 })
-const AddressModal = mongoose.model('AddressModal', AddressSchema, 'Address')
+const AddressModal = model<AddressType>(
+  'AddressModal',
+  AddressSchema,
+  DBCollection.ADDRESS
+)
 export default AddressModal

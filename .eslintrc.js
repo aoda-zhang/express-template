@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     'no-var': 'error',
     'no-undef': 0,
-    '@typescript-eslint/consistent-type-definitions': ['error', 'interface']
+    '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+    'no-unused-vars': 1
   }
 }
