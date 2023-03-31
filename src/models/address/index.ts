@@ -1,6 +1,6 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
 import { DBCollection } from '../../constant/enum/DBCollection'
-export interface AddressType {
+export interface AddressType extends Document {
   value: string
 }
 const AddressSchema = new Schema({

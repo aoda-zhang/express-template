@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
-import AddressModal from '../../../models/address'
+import { AddressType } from '../../../models/address'
 import addressService from '../services'
 class AddressController {
   // 增
   addAddress = async (req: Request, res: Response) => {
-    const data = req?.query?.value
+    const param = req.body as AddressType
     try {
-      await addressService.addAddress(data)
+      await addressService.addAddress(param)
       res.status(200).json('保存成功')
     } catch (error) {
       res.status(400).json('保存失败')

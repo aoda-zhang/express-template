@@ -1,11 +1,8 @@
 import { AddressType } from './../../../models/address'
 import AddressModal from '../../../models/address'
-import { ParsedQs } from 'qs'
 class AddressService {
   // 增
-  addAddress = async (
-    data: string | string[] | ParsedQs | ParsedQs[] | undefined
-  ) => {
+  addAddress = async (data: AddressType) => {
     try {
       await new AddressModal(data).save()
     } catch (error) {
