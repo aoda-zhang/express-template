@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { AddressType } from '../../../models/address'
 import addressService from '../services'
 class AddressController {
-  // 增
+  // CRUD control
   addAddress = async (req: Request, res: Response) => {
     const param = req.body as AddressType
     try {
@@ -15,10 +15,10 @@ class AddressController {
   // 删
 
   // 查
-  getAddress = async (req: Request, res: Response) => {
+  getAddressByID = async (req: Request, res: Response) => {
     const id = req?.params?.id
     try {
-      const data = await addressService.getAddress(id)
+      const data = await addressService.getAddressByID(id)
       res.status(200).json(data)
     } catch (error) {
       res.status(400).send('错误请求')
