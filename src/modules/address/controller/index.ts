@@ -3,6 +3,8 @@ import { AddressType } from '../../../models/address'
 import addressService from '../services'
 class AddressController {
   // CRUD control
+
+  // --------------create a new address--------------
   addAddress = async (req: Request, res: Response) => {
     const param = req.body as AddressType
     try {
@@ -12,9 +14,8 @@ class AddressController {
       res.status(400).json('保存失败')
     }
   }
-  // 删
 
-  // 查
+  // --------------read a address by ID--------------
   getAddressByID = async (req: Request, res: Response) => {
     const id = req?.params?.id
     try {
@@ -25,9 +26,31 @@ class AddressController {
     }
   }
 
-  // 查询单个地址详情
+  // --------------update a address by ID--------------
+  updateAddress = async (req: Request, res: Response) => {
+    const name = req?.params?.name
+    const newName = req?.params?.newName
+    try {
+      const data = await addressService.updateAddressName(name, newName)
+      console.log('更新数据', data)
 
-  // 改
+      res.status(200).json(data)
+    } catch (error) {
+      res.status(400).send('错误请求')
+    }
+  }
+
+  // --------------remove a address by ID--------------
+  removeAddress = async (req: Request, res: Response) => {
+    const id = req?.params?.id
+    try {
+      const data = await addressService.removeAddressByID(id)
+      console.log('删除数据', data)
+      res.status(200).json(data)
+    } catch (error) {
+      res.status(400).send('错误请求')
+    }
+  }
 }
 const addressController = new AddressController()
 export default addressController

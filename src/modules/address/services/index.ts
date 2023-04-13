@@ -45,12 +45,9 @@ class AddressService {
 
   // update one address for some field
 
-  updateAddressByID = async (id: string, data: AddressType) => {
+  updateAddressName = async (name: string, newName: string) => {
     try {
-      return await AddressModal.updateOne(
-        { name: 'Central Perk Cafe' },
-        { $set: { name: 'test data' } }
-      )
+      return await AddressModal.updateOne({ name }, { $set: { name: newName } })
     } catch (error) {
       throw Error('find error')
     }

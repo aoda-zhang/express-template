@@ -1,10 +1,12 @@
 import { Router } from 'express'
 import addressController from '../controller'
 const addressRouters = Router()
-// 增加一条地址信息
+// add a new address
 addressRouters.post('/address/add', addressController.addAddress)
-// 查询地址列表
-addressRouters.get('/address', addressController.getAddress)
-// 查询地址详情
-addressRouters.get('/address/:id', addressController.getAddress)
+// read a address by ID
+addressRouters.get('/address/read/:id', addressController.getAddressByID)
+// update a address by address name
+addressRouters.put('/address/:name/:newName', addressController.updateAddress)
+// remove a address
+addressRouters.delete('/address/remove/:id', addressController.removeAddress)
 export default addressRouters

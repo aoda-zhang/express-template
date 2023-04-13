@@ -4,6 +4,8 @@ dotenv.config({
   path: path.resolve(__dirname, `${process.env.NODE_ENV}.env`)
 })
 export default {
+  // 当前环境
+  NODE_ENV: process.env.NODE_ENV,
   // 运行端口
   PORT: process.env.PORT,
   // 加密key
