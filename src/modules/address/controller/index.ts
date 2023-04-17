@@ -32,8 +32,6 @@ class AddressController {
     const newName = req?.params?.newName
     try {
       const data = await addressService.updateAddressName(name, newName)
-      console.log('更新数据', data)
-
       res.status(200).json(data)
     } catch (error) {
       res.status(400).send('错误请求')
@@ -45,7 +43,6 @@ class AddressController {
     const id = req?.params?.id
     try {
       const data = await addressService.removeAddressByID(id)
-      console.log('删除数据', data)
       res.status(200).json(data)
     } catch (error) {
       res.status(400).send('错误请求')
