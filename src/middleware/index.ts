@@ -21,7 +21,9 @@ const initMiddleware = (app: Express) => {
     legacyHeaders: false // Disable the `X-RateLimit-*` headers
   })
   app.use(apiLimiter)
+  // 返回前端json格式数据
   app.use(bodyParser.json())
+  // 表单请求使用json数据
   app.use(bodyParser.urlencoded({ extended: false }))
   // 先鉴权，再加载路由
   // jwtToken(app)

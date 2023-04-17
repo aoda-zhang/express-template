@@ -1,11 +1,12 @@
+import { Request, NextFunction } from 'express'
 const errorHandle = (
   err: { name: string },
-  req: any,
+  req: Request,
   res: {
     statusCode: number
     send: (arg0: { status: number; message: string }) => void
   },
-  next: any
+  next: NextFunction
 ) => {
   let code = 500
   let message = 'Internal Server Error'
