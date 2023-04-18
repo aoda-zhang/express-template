@@ -5,7 +5,7 @@ import errorHandle from './errorHandle'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
-const initMiddleware = (app: Express) => {
+const initGlobalMiddleware = (app: Express) => {
   app.use(express.json())
   // 防止XSS攻击
   app.use(helmet())
@@ -30,4 +30,4 @@ const initMiddleware = (app: Express) => {
   // 错误处理
   app.use(errorHandle)
 }
-export default initMiddleware
+export default initGlobalMiddleware

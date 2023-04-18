@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { AddressType } from '../../../models/address'
+import { AddressType } from '../models/address'
 import addressService from '../services'
 class AddressController {
   // CRUD control

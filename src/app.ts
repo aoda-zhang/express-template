@@ -1,11 +1,11 @@
 import express from 'express'
 import envConfig from '../config/env'
-import initMiddleware from './middleware'
+import initGlobalMiddleware from './middleware/global'
 import initRouter from './routes'
-import DBConnection from './utils/DBConnection'
+import DBConnection from './core/DBConnection'
 const app = express()
 // 中间件注册
-initMiddleware(app)
+initGlobalMiddleware(app)
 // 路由注册
 initRouter(app)
 // 数据库连接

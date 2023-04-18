@@ -1,5 +1,4 @@
-import { AddressType } from './../../../models/address'
-import AddressModal from '../../../models/address'
+import AddressModal, { AddressType } from '../models/address'
 class AddressService {
   // CRUD demo
   // -----------create-----------
