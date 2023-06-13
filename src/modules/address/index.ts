@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import addressController from '../controller'
+import addressController from './controller'
 const addressRouters = Router()
 // add a new address
 addressRouters.post('/address/add', addressController.addAddress)

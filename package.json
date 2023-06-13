@@ -1,14 +1,15 @@
 {
-  "name": "full-stack-back",
+  "name": "express-template",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon src/app.ts",
+    "dev": "cross-env NODE_ENV=development nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts",
     "start": "ts-node src/app.ts",
-    "build": "cross-env NODE_ENV=production npx tsc -p tsconfig.json",
+    "build": "cross-env NODE_ENV=production tsc && tsc-alias",
     "server": "nodemon ./dist/bin/www",
     "lint": "eslint src --ext .ts,.js --fix"
   },
   "private": "true",
   "dependencies": {
+    "-": "^0.0.1",
     "@types/cors": "^2.8.13",
     "@types/mongoose": "^5.11.97",
     "body-parser": "^1.20.2",
@@ -24,12 +25,17 @@
     "express-jwt": "^7.7.7",
     "express-rate-limit": "^6.7.0",
     "express-validator": "^6.15.0",
+    "g": "^2.0.1",
     "helmet": "^6.0.0",
     "husky": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "lint-staged": "^12.3.8",
+    "mddir": "^1.1.1",
     "nodemon": "^2.0.20",
-    "ts-node": "^10.9.1"
+    "tree-cli": "^0.6.7",
+    "treer": "^1.0.4",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.6"
   },
   "husky": {
     "hooks": {

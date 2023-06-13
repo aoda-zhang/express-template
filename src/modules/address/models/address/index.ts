@@ -1,5 +1,5 @@
+import { DBCollection } from '@constant/enum/DBCollection'
 import { Schema, model, Document } from 'mongoose'
-import { DBCollection } from '../../../../constant/enum/DBCollection'
 export interface AddressType extends Document {
   name: string
   direction?: string

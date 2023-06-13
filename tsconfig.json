@@ -23,6 +23,15 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "removeComments": true
+    "removeComments": true,
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": ["src/utils/*"],
+      "@constant/*": ["src/constant/*"],
+      "@core/*": ["src/core/*"],
+      "@modules/*": ["src/modules/*"],
+      "@subMiddleware/*": ["src/middleware/sub/*"],
+      "@config/*": ["config/*"],
+    }
   }
 }

@@ -2,7 +2,7 @@ import express from 'express'
 import envConfig from '../config/env'
 import initGlobalMiddleware from './middleware/global'
 import initRouter from './routes'
-import DBConnection from './core/DBConnection'
+import DBConnection from '@core/DBConnection'
 const app = express()
 // 中间件注册
 initGlobalMiddleware(app)
