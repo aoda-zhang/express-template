@@ -4,42 +4,42 @@
 
 ```tsx
 ├─ .github
-│  └─ workflows  												// github action 文件，github会扫描此路径下的所有yml文件，并根据内容运行具体脚本
-├─ .gitignore    												// 项目中不允许提交的code在此记录
-├─ .prettierrc   												// prettier格式化设置
+│  └─ workflows  			// github action 文件，github会扫描此路径下的所有yml文件，并根据内容运行具体脚本
+├─ .gitignore    		 // 项目中不允许提交的code在此记录
+├─ .prettierrc   		// prettier格式化设置
 ├─ .vscode
-│  └─ launch.json   										// 使用vscode运行后端项目的debbuger设置
+│  └─ launch.json   // 使用vscode运行后端项目的debbuger设置
 ├─ README.MD
 ├─ config  
-│  └─ env    														// 不同的化境变量文件
+│  └─ env    				// 不同的化境变量文件
 │     └─ index.ts
 ├─ src
-│  ├─ app.ts														// 项目入口文件
-│  ├─ constant													// 项目常量文件夹
+│  ├─ app.ts				// 项目入口文件
+│  ├─ constant			// 项目常量文件夹
 │  │  ├─ enum
 │  │  └─ interface
-│  ├─ core															// 项目工程化集成，如数据库，log日志，项目监控等
-│  ├─ middleware												// 项目中间件
-│  │  ├─ global													// 全局中间件
-│  │  └─ sub														// 非全局中间件
-│  ├─ modules														// 具体的业务模块
-│  │  ├─ address												// 遵循MVC模式				
-│  │  │  ├─ controller									// controller层处理路由
+│  ├─ core						// 项目工程化集成，如数据库，log日志，项目监控等
+│  ├─ middleware			// 项目中间件
+│  │  ├─ global				// 全局中间件
+│  │  └─ sub					// 非全局中间件
+│  ├─ modules					// 具体的业务模块
+│  │  ├─ address				// 遵循MVC模式				
+│  │  │  ├─ controller			// controller层处理路由
 │  │  │  │  └─ index.ts
-│  │  │  ├─ models											// DB数据模型
+│  │  │  ├─ models					// DB数据模型
 │  │  │  │  └─ address
 │  │  │  │     └─ index.ts
-│  │  │  └─ services										// 处理具体DB和service操作
+│  │  │  └─ services				// 处理具体DB和service操作
 │  │  │     └─ index.ts
-│  │  │  └─ index.ts										// 外层路由注册
-│  └─ utils															// 工具函数
-├─ tsconfig.json												// ts项目设置
+│  │  │  └─ index.ts				// 外层路由注册
+│  └─ utils									// 工具函数
+├─ tsconfig.json						// ts项目设置
 
 ```
 
 ## 启动方式
 ```ts
-**yarn** run dev 或 npm run dev
+yarn run dev 或 npm run dev
 ```
 
 
