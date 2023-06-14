@@ -137,6 +137,7 @@ export default DBConnection
 
 ```ts
 1. yarn add cors
+// 入口文件app.js中调用
 2. app.use(cors())
 ```
 ## 加密
