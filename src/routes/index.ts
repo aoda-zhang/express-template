@@ -1,8 +1,8 @@
 import express, { Router, Express } from 'express'
 import path from 'path'
-import addressRouters from '../modules/address'
-import loginRoute from '../modules/login/route'
-import usersRouters from '../modules/users/route'
+import loginRoute from '@modules/login/route'
+import usersRouters from '@modules/users/route'
+import addressRouters from '@modules/address'
 const PREFIX = process?.env?.PREFIX ?? '/api'
 // 无token路由
 export const noTokenRouters = ['/', `/${PREFIX}/address/`, `/${PREFIX}/login/`]
