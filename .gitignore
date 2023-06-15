@@ -120,6 +120,7 @@ dist
 .pnp.*
 
 
-# env 
-config/env
+# config
+config/env/*.env
+*.env
 

@@ -1,7 +1,9 @@
+import envConfig from '@config/env'
 import mongoose from 'mongoose'
-import envConfig from '../../config/env'
 const DBConnection = () => {
   mongoose.connect(envConfig?.DATABASE_URL ?? '')
+  console.log('envConfig', envConfig)
+
   const dataBaseConnectState = mongoose.connection
   if (envConfig.NODE_ENV === 'development') {
     dataBaseConnectState.on('error', (error: any) => {

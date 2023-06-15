@@ -1,6 +1,6 @@
 import express, { Router, Express } from 'express'
 import path from 'path'
-import addressRouters from '../modules/address/router'
+import addressRouters from '../modules/address'
 import loginRoute from '../modules/login/route'
 import usersRouters from '../modules/users/route'
 const PREFIX = process?.env?.PREFIX ?? '/api'

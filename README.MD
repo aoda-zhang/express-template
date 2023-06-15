@@ -126,6 +126,9 @@ const DBConnection = () => {
 }
 export default DBConnection
 
+
+// 入口文件app.js中调用
+
 ```
 
 ## 请求统一封装
@@ -148,14 +151,42 @@ helmet
 ## JWT
 
 ## vscode 中 debugger 调试
+```ts
+// 文件夹.vscode/lanuch.json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "console": "internalConsole",
+      "name": "调试express",
+      "skipFiles": ["node_modules/**"],
+      // 项目的入口文件
+      "args": ["${workspaceRoot}/src/app.ts"],
+      // 将ts转换为js的配置，需要找到自己安装ts-node的绝对路径
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "restart": true,
+      "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true,
+      // 本地开发使用的环境变量文件
+      "envFile": "${workspaceFolder}/config/env/development.env"
+    }
+  ]
+}
+
+```
+
+
 
 ---------------------
 1. 返回数据中如何隐藏部分数据
-2. 公共的数据模型如何继承或者公用
-3. 创建和更新时间如何进行数据格式转换
 
+   
 
-打包后如何启动后段项目
-如何验证环境变量是否被替换
-不同环境变量如何被保存等
-切换不同的语言
+2. 创建和更新时间如何进行数据格式转换
+   如何验证环境变量是否被替换
+   不同环境变量如何被保存等
+   切换不同的语言

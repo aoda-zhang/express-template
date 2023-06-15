@@ -3,7 +3,7 @@ import path from 'path'
 dotenv.config({
   path: path.resolve(__dirname, `${process.env.NODE_ENV}.env`)
 })
-export default {
+const envConfig = {
   // 当前环境
   NODE_ENV: process.env.NODE_ENV,
   // 运行端口
@@ -15,3 +15,4 @@ export default {
   // 全局API前缀
   PREFIX: process.env.DATABASE_URL
 }
+export default envConfig
