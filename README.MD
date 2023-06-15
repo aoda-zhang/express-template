@@ -78,7 +78,7 @@ yarn run dev 或 npm run dev
 > {
 >   "scripts": {
 >     // 本地开发路径别名处理
->     "dev": "cross-env NODE_ENV=development nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts",
+>     "dev": "cross-env NODE_ENV=develop nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts",
 >     
 >     // 打包路径别名处理
 >     "build": "cross-env NODE_ENV=production tsc && tsc-alias",
@@ -93,7 +93,7 @@ yarn run dev 或 npm run dev
 ```ts
 // path:package.json
  "scripts": {
-     "dev": "cross-env NODE_ENV=development nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts"
+     "dev": "cross-env NODE_ENV=develop nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts"
   },
 
 ```

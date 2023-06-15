@@ -1,7 +1,7 @@
 {
   "name": "express-template",
   "scripts": {
-    "dev": "cross-env NODE_ENV=test nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts",
+    "dev": "cross-env NODE_ENV=develop nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts",
     "start": "ts-node src/app.ts",
     "build": "cross-env NODE_ENV=production tsc && tsc-alias",
     "server": "nodemon ./dist/bin/www",
