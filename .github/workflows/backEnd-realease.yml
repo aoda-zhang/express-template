@@ -4,9 +4,9 @@ name: 'backEnd-realease'
 
 on:
   push:
-    branches: ['main', 'master']
+    # branches: ['main', 'master']
   pull_request:
-    branches: ['main', 'master']
+    # branches: ['main', 'master']
 
 env:
   BUILD_DIST_NAME: 'back-end-app'
