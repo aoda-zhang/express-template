@@ -5,7 +5,7 @@ const DBConnection = () => {
   console.log('envConfig', envConfig)
 
   const dataBaseConnectState = mongoose.connection
-  if (envConfig.NODE_ENV === 'development') {
+  if (envConfig.NODE_ENV === 'dev') {
     dataBaseConnectState.on('error', (error: any) => {
       console.error(`数据库连接出错:${error}`)
     })

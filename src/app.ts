@@ -14,7 +14,7 @@ console.log('envConfig', envConfig)
 
 const PORT = envConfig?.PORT ?? 8080
 app.listen(PORT, () => {
-  if (envConfig.NODE_ENV === 'development') {
+  if (envConfig.NODE_ENV === 'dev') {
     // 开发环境说明
     console.log(`本地开发运行在: http://localhost:${PORT}`)
   }

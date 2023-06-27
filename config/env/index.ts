@@ -13,6 +13,6 @@ const envConfig = {
   // 数据库连接
   DATABASE_URL: process.env.DATABASE_URL,
   // 全局API前缀
-  PREFIX: process.env.DATABASE_URL
+  PREFIX: process.env.PREFIX
 }
 export default envConfig

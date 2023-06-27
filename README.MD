@@ -112,7 +112,7 @@ const DBConnection = () => {
   mongoose.connect(你的数据库连接字符串)
   const dataBaseConnectState = mongoose.connection
   // 本地开发可选择监听数据库的连接状态
-  if (envConfig.NODE_ENV === 'development') {
+  if (envConfig.NODE_ENV === 'dev') {
     dataBaseConnectState.on('error', (error: any) => {
       console.error(`数据库连接出错:${error}`)
     })
@@ -172,7 +172,7 @@ helmet
       "internalConsoleOptions": "neverOpen",
       "autoAttachChildProcesses": true,
       // 本地开发使用的环境变量文件
-      "envFile": "${workspaceFolder}/config/env/development.env"
+      "envFile": "${workspaceFolder}/config/env/dev.env"
     }
   ]
 }
@@ -190,3 +190,6 @@ helmet
    如何验证环境变量是否被替换
    不同环境变量如何被保存等
    切换不同的语言
+
+3.不同环境配置不同的json文件
+4.跨域设置允许请求的地址

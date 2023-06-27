@@ -31,6 +31,15 @@ class AddressService {
     }
   }
 
+  // get all the address
+  getAddressList = async () => {
+    try {
+      return await AddressModal.find()
+    } catch (error) {
+      throw Error('find error')
+    }
+  }
+
   // get address by address name
   getAddressByName = async (name: string) => {
     try {

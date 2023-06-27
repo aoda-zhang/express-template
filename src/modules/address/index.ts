@@ -5,6 +5,8 @@ const addressRouters = Router()
 addressRouters.post('/address/add', addressController.addAddress)
 // read a address by ID
 addressRouters.get('/address/read/:id', addressController.getAddressByID)
+// read all the address
+addressRouters.get('/address/list', addressController.getAddressList)
 // update a address by address name
 addressRouters.put('/address/:name/:newName', addressController.updateAddress)
 // remove a address

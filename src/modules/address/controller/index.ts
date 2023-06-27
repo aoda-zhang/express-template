@@ -26,6 +26,16 @@ class AddressController {
     }
   }
 
+  // --------------read all the address--------------
+  getAddressList = async (req: Request, res: Response) => {
+    try {
+      const data = await addressService.getAddressList()
+      res.status(200).json(data)
+    } catch (error) {
+      res.status(400).send('错误请求')
+    }
+  }
+
   // --------------update a address by ID--------------
   updateAddress = async (req: Request, res: Response) => {
     const name = req?.params?.name

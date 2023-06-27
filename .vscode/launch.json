@@ -17,7 +17,7 @@
       "internalConsoleOptions": "neverOpen",
       "autoAttachChildProcesses": true,
       // 本地开发使用的环境变量文件
-      "envFile": "${workspaceFolder}/config/env/development.env"
+      "envFile": "${workspaceFolder}/config/env/dev.env"
     }
   ]
 }
