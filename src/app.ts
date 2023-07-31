@@ -10,8 +10,6 @@ initGlobalMiddleware(app)
 initRouter(app)
 // 数据库连接
 DBConnection()
-console.log('envConfig', envConfig)
-
 const PORT = envConfig?.PORT ?? 8080
 app.listen(PORT, () => {
   if (envConfig.NODE_ENV === 'dev') {
