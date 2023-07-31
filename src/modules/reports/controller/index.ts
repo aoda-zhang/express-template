@@ -18,3 +18,11 @@ const reportController = new Report()
 export default reportController
 
 // 通过远程地址获取文件
+// res.download('./file.pdf', 'user-facing-filename.pdf', (err) => {
+//   if (err) {
+//     //handle error
+//     return
+//   } else {
+//     //do something
+//   }
+// })
