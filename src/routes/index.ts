@@ -2,13 +2,13 @@ import express, { Router, Express } from 'express'
 import path from 'path'
 import loginRoute from '@modules/login/route'
 import addressRouters from '@modules/address'
-import reportRouter from '@modules/reports'
+import fileRouter from '@modules/files'
 
 const PREFIX = process?.env?.PREFIX ?? '/api'
 // 无token路由
 export const noTokenRouters = ['/', `/${PREFIX}/address/`, `/${PREFIX}/login/`]
 // 各模块注册路由
-const routeRender: Router[] = [loginRoute, addressRouters, reportRouter]
+const routeRender: Router[] = [loginRoute, addressRouters, fileRouter]
 const initRouter = (app: Express) => {
   // 前端静态资源加载
   app.use(express.static('public'))

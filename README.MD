@@ -225,3 +225,11 @@ helmet
 
 3.不同环境配置不同的json文件
 4.跨域设置允许请求的地址
+
+JWTtoken 验证及其设置
+redis模拟使用
+MQ模拟使用
+
+定时job处理数据库数据、
+redis检测数据，有新数据push，马上更新到redis
+monorepo 怎么做

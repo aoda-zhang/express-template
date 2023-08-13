@@ -4,6 +4,13 @@ dotenv.config({
   path: path.resolve(__dirname, `${process.env.NODE_ENV}.env`)
 })
 const envConfig = {
+  // 全局请求baseURl
+  BASE_URL: process.env.BASE_URL,
+  API_KEY: process.env.API_KEY,
+  // file 模块
+  FILE: {
+    baseURL: process.env.REPORT_BASE_URL
+  },
   // 当前环境
   NODE_ENV: process.env.NODE_ENV,
   // 运行端口
