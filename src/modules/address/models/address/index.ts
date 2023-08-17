@@ -1,4 +1,4 @@
-import { DBCollection } from '@constant/enum/DBCollection'
+import { DBCollection } from '@constant/DB.collection'
 import { Schema, model, Document } from 'mongoose'
 export interface AddressType extends Document {
   name: string

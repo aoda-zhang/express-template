@@ -1,24 +1,43 @@
-import { Request, NextFunction } from 'express'
-const errorHandle = (
-  err: { name: string },
-  req: Request,
-  res: {
+import { NextFunction, Request, Response } from 'express'
+interface BoomError {
+  data: any
+  isBoom: boolean
+  isServer: boolean
+  output: {
     statusCode: number
-    send: (arg0: { status: number; message: string }) => void
-  },
+    headers: object
+    payload: {
+      statusCode: number
+      error: string
+      message: string
+    }
+  }
+}
+type Errors = Error & BoomError
+const errorHandle = (
+  err: Errors,
+  req: Request,
+  res: Response,
   next: NextFunction
 ) => {
-  let code = 500
-  let message = 'Internal Server Error'
-  // token解析的错误
-  if (err.name === 'UnauthorizedError') {
-    code = 401
-    message = 'no login'
+  let errorCode = 500
+  let errorMessage = 'Bad Request'
+  let stack = 'Bad Request'
+  const path = req?.url
+  if (err?.message === 'UnauthorizedError') {
+    errorCode = 401
+    errorMessage = 'no access'
   }
-  res.statusCode = code
-  res.send({
-    status: code,
-    message
+  if (err?.isBoom) {
+    errorCode = err?.output?.statusCode ?? 500
+    errorMessage = err?.output?.payload?.message ?? 'Internal Server Error'
+    stack = err?.stack ?? 'Internal Server Error'
+  }
+  return res.status(errorCode).send({
+    errorCode,
+    errorMessage,
+    path,
+    stack
   })
 }
 export default errorHandle

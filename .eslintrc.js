@@ -14,6 +14,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   rules: {
+    indent: ['off', 2],
     'no-var': 'error',
     'no-undef': 0,
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],

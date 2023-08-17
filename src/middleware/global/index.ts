@@ -5,6 +5,7 @@ import errorHandle from './errorHandle'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
+import 'express-async-errors'
 const initGlobalMiddleware = (app: Express) => {
   app.use(express.json())
   // 防止XSS攻击
@@ -12,6 +13,7 @@ const initGlobalMiddleware = (app: Express) => {
   // 统一response
   app.use(responseHeader)
   // prox 代理
+  // 设置具体的cros代理域名
   app.use(cors())
   // 限速设置
   const apiLimiter = rateLimit({

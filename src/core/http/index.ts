@@ -1,3 +1,4 @@
+// @ts-nocheck
 import envConfig from '@config/env'
 import axios, {
   AxiosRequestConfig,
@@ -34,9 +35,12 @@ Http.interceptors.request.use(interceptorsReq, err => {
 
 // 成功响应拦截处理
 const interceptorsResSuccess = <T>(response: AxiosResponse<T>) => {
-  if (response.status >= 200 && response.status < 400) {
-    const responseData = response?.data
-    return Promise.resolve(responseData)
+  if (
+    response.status >= 200 &&
+    response.status < 400 &&
+    response?.statusText === 'OK'
+  ) {
+    return Promise.resolve(response?.data)
   } else {
     errorHandler(response.status)
     return Promise.reject()
@@ -48,35 +52,32 @@ Http.interceptors.response.use(interceptorsResSuccess, (error: AxiosError) => {
   return Promise.reject(error)
 })
 const httpRequest = {
-  getAPI<T extends unknown>(
+  getAPI<T = any>(
     url: string,
     params?: Record<string, any>,
     config?: AxiosRequestConfig
-  ): Promise<T | any> {
+  ): Promise<T> {
     return Http.get<T>(url, { params, ...config })
   },
-  deleteAPI<T extends unknown>(
+  deleteAPI<T = any>(
     url: string,
     params?: Record<string, any>,
     config?: AxiosRequestConfig
   ): Promise<T> {
-    // @ts-ignore
     return Http.delete<T>(url, { params, ...config })
   },
-  postAPI<T extends unknown>(
-    url: string,
-    data?: Record<string, any>,
-    config?: AxiosRequestConfig
-  ): Promise<T | any> {
-    // @ts-ignore
-    return Http.post<T>(url, data, { ...config })
-  },
-  putAPI<T extends unknown>(
+  postAPI<T = any>(
     url: string,
     data?: Record<string, any>,
     config?: AxiosRequestConfig
   ): Promise<T> {
-    // @ts-ignore
+    return Http.post<T>(url, data, { ...config })
+  },
+  putAPI<T = any>(
+    url: string,
+    data?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     return Http.put<T>(url, data, { ...config })
   }
 }

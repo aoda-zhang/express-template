@@ -3,7 +3,8 @@ import path from 'path'
 import loginRoute from '@modules/login/route'
 import addressRouters from '@modules/address'
 import fileRouter from '@modules/files'
-
+import errorHandle from 'src/middleware/global/errorHandle'
+import 'express-async-errors'
 const PREFIX = process?.env?.PREFIX ?? '/api'
 // 无token路由
 export const noTokenRouters = ['/', `/${PREFIX}/address/`, `/${PREFIX}/login/`]
@@ -18,5 +19,6 @@ const initRouter = (app: Express) => {
     // 默认跳转页面，一般为site首页
     res.sendFile(path.resolve('assets/views/index.html'))
   })
+  app.use(errorHandle)
 }
 export default initRouter

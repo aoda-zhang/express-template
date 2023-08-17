@@ -27,7 +27,7 @@
     "baseUrl": ".",
     "paths": {
       "@utils/*": ["src/utils/*"],
-      "@constant/*": ["src/constant/*"],
+      "@constant/*": ["src/types/*"],
       "@core/*": ["src/core/*"],
       "@modules/*": ["src/modules/*"],
       "@subMiddleware/*": ["src/middleware/sub/*"],

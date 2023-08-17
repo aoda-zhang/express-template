@@ -1,6 +1,7 @@
 import envConfig from '@config/env'
 import httpRequest from '@core/http'
 import { AxiosRequestConfig } from 'axios'
+import { Images } from '../types'
 
 class FileService {
   private fileReqConfig: AxiosRequestConfig = {
@@ -34,16 +35,15 @@ class FileService {
 
   // get a image
   getImg = async (hash: string) => {
-    try {
-      const response = await httpRequest.getAPI(
-        '/upload_history',
-        { page: 1 },
-        this.fileReqConfig
-      )
-      console.log('getUploadedFile---------------', response)
-    } catch (error) {
-      throw Error('find error')
+    const response = await httpRequest.getAPI<Images>(
+      '/upload_history',
+      { page: 1 },
+      this.fileReqConfig
+    )
+    if (response?.success) {
+      return response?.data?.find(_item => _item?.hash === hash) ?? null
     }
+    return null
   }
 
   // -----------delete-----------
@@ -51,9 +51,10 @@ class FileService {
   // delete a image
   removeImgByID = async (hash: string) => {
     try {
-      return await httpRequest.deleteAPI(
+      return await httpRequest.getAPI(
         `delete/${hash}`,
         {
+          hash,
           format: 'json'
         },
         this.fileReqConfig
