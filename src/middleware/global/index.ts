@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
 import 'express-async-errors'
+import jwtToken from './jwtToken'
 const initGlobalMiddleware = (app: Express) => {
   app.use(express.json())
   // 防止XSS攻击
@@ -28,7 +29,7 @@ const initGlobalMiddleware = (app: Express) => {
   // 表单请求使用json数据
   app.use(bodyParser.urlencoded({ extended: false }))
   // 先鉴权，再加载路由
-  // jwtToken(app)
+  jwtToken(app)
   // 错误处理
   app.use(errorHandle)
 }

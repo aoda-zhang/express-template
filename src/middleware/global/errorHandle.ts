@@ -1,41 +1,27 @@
+import { Errors, Httpconts } from '@constant/httpType'
 import { NextFunction, Request, Response } from 'express'
-interface BoomError {
-  data: any
-  isBoom: boolean
-  isServer: boolean
-  output: {
-    statusCode: number
-    headers: object
-    payload: {
-      statusCode: number
-      error: string
-      message: string
-    }
-  }
-}
-type Errors = Error & BoomError
 const errorHandle = (
   err: Errors,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  let errorCode = 500
-  let errorMessage = 'Bad Request'
-  let stack = 'Bad Request'
+  let statusCode = err?.status ?? 500
+  let message = err?.message ?? Httpconts.badRequest
+  let stack = err?.stack ?? Httpconts.badRequest
   const path = req?.url
-  if (err?.message === 'UnauthorizedError') {
-    errorCode = 401
-    errorMessage = 'no access'
+  if (err?.name === Httpconts.autuError) {
+    statusCode = 401
+    message = err?.message ?? Httpconts.loginAgain
   }
   if (err?.isBoom) {
-    errorCode = err?.output?.statusCode ?? 500
-    errorMessage = err?.output?.payload?.message ?? 'Internal Server Error'
-    stack = err?.stack ?? 'Internal Server Error'
+    statusCode = err?.output?.statusCode ?? 500
+    message = err?.output?.payload?.message ?? Httpconts.systemError
+    stack = err?.stack ?? Httpconts.systemError
   }
-  return res.status(errorCode).send({
-    errorCode,
-    errorMessage,
+  return res.status(statusCode).send({
+    statusCode,
+    message,
     path,
     stack
   })

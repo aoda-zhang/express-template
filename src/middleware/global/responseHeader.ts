@@ -1,11 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
 const responseHeader = (req: Request, res: Response, next: NextFunction) => {
-  const { origin, Origin, referer, Referer } = req.headers
-  const allowOrigin = origin || Origin || referer || Referer || '*'
-
-  // 允许请求源
-  res.header('Access-Control-Allow-Origin', allowOrigin)
   // 允许头部字段
   res.header('Access-Control-Allow-Headers', 'Content-Type')
   // 允许公开的头部字段
