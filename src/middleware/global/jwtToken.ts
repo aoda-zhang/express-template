@@ -1,8 +1,8 @@
 import { Express, Request } from 'express'
 import { expressjwt } from 'express-jwt'
 import whiteListRouters from '../../routes/whitelistRoute'
+const SCRECT_KEY = process.env.SCRECT_KEY ?? ''
 const jwtToken = (app: Express) => {
-  const SCRECT_KEY = process.env.SCRECT_KEY ?? ''
   app.use(
     expressjwt({
       secret: SCRECT_KEY,

@@ -215,21 +215,71 @@ helmet
 
 > 通常在开发中，我们会有多种环境，如dev，test，prod，通过使用cros-env 来设置不同的环境，我们能够达到区分不同环境的效果，任何现代部署环境中，都会有环境变量替换，我们只需要替换掉prod环境中的key value即可
 
+## JWToken的使用
+
+> 将用户相关信息生成加密的token，同时以json格式解析便是jwToken
+>
+> jwtToken主要包含两部分，生成token和解析token，一般用户登陆时生成token，前端保存在local，每次访问后端API时，将token携带在请求头上，后端通过全局中间件来解析token是否合法和过期，从而达到校验用户的目的
+
+### token设置
+
+1. npm i jsonwebtoken -s
+2. 登陆接口中设置具体的token生成参数
+
+```ts
+const SCRECT_KEY = envConfig?.SCRECT_KEY ?? ''  // 切记加密key存放在环境变量中 
+login = (req: Request, res: Response) => {
+    // 设置jwtToken
+    const userInfo = req?.body // 获取用户信息
+    const token = jwt.sign(
+      {
+        userId: userInfo.id,  // 加入需要存放到token中的数据，请勿将密码保存其中
+        admin: userInfo?.role === 'admin'
+      },
+      SCRECT_KEY,
+      {
+        expiresIn: '24h'  // 过期时间
+      }
+    )
+    res.json({
+      status: StatusCodes.OK,
+      message: 'login success!',
+      data: { token }
+    })
+  }
+```
+
+### token解析
+
+1. npm i express-jwt -s
+2. 全局中间件解析token
+
+```ts
+const SCRECT_KEY = process.env.SCRECT_KEY ?? ''
+app.use(
+    expressjwt({
+      secret: SCRECT_KEY,
+      requestProperty: 'auth', // 通过req.auth可访问jwToken解析的内容
+      algorithms: ['HS256'], // 使用何种加密算法解析
+      getToken (req: Request) {
+        if (req?.headers?.authorization?.split(' ')[0] === 'Bearer') {
+          return req?.headers?.authorization?.split(' ')[1]
+        } else if (req?.headers?.token) {
+           // 覆盖原有的token头，当前会判断请求头上是否有token字段
+          return req?.headers?.token
+        }
+        return null
+      }
+    }).unless({ path: whiteListRouters }) // 无需验证token的路由白名单
+  )
+```
+
+```ts
+const PREFIX = envConfig?.PREFIX ?? '/api'  // 全局路由前缀
+// 路由白名单  无token校验
+const whiteRouters = [`${PREFIX}/user/login`, `${PREFIX}/user/register`]
+export default whiteRouters
+```
 
 
-1. 返回数据中如何隐藏部分数据
 
-   
-
-2. 创建和更新时间如何进行数据格式转换
-
-3.不同环境配置不同的json文件
-4.跨域设置允许请求的地址
-
-JWTtoken 验证及其设置
-redis模拟使用
-MQ模拟使用
-
-定时job处理数据库数据、
-redis检测数据，有新数据push，马上更新到redis
-monorepo 怎么做
