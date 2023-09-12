@@ -1,4 +1,4 @@
-import express, { Router, Express } from 'express'
+import express, { Router, Express, Request, Response } from 'express'
 import path from 'path'
 import userRoute from '@modules/users'
 import addressRouters from '@modules/address'
@@ -14,7 +14,7 @@ const initRouter = (app: Express) => {
   app.use(express.static('public'))
   // 全局路由前缀+路由中间件
   app.use(PREFIX, routeRender)
-  app.use('*', (req, res) => {
+  app.use('*', (req: Request, res: Response) => {
     // 默认跳转页面，一般为site首页
     res.sendFile(path.resolve('assets/views/index.html'))
   })

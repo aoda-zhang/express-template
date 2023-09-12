@@ -41,9 +41,6 @@
 ```ts
 yarn run dev 或 npm run dev
 ```
-
-
-
 ## 路径别名设置
 > 对于大型项目而言，往往会有很多层级的文件夹，我们总会看到诸如“../../../../”这样的路径引入，想必开发者对此吐槽不少，因此路径别名就非常有用来解决这一问题
 
@@ -99,10 +96,43 @@ yarn run dev 或 npm run dev
 ```
 
 ## 环境变量设置
+> 实际项目中，对于一些敏感，而且会根据不同的环境来运行的，往往会采用环境变量的方式
+>
+> 为了在不同的操作系统中都可以读取到环境变量，实际开发中，会采用cross-env来适配所有的操作系统
+  >
+> node项目中，dotenv会读取.env文件中的变量，并且加载到process中，使用时可从process中读取
 
-dotenv
+```ts
+yarn add cross-env dotenv -D
+```
 
-## 日志请求查看
+```ts
+// package.json中指定当前运行的具体环境
+"scripts": {
+  // 指定为dev环境
+    "dev:watch": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node -r tsconfig-paths/register --files src/app.ts",
+  // 指定为production环境
+    "build": "cross-env NODE_ENV=production tsc && tsc-alias",
+  }
+```
+
+```ts
+// config.js
+import * as dotenv from 'dotenv'
+import path from 'path'
+// 根据不同的环境，加载对应的env文件
+dotenv.config({
+  path: path.resolve(__dirname, `${process.env.NODE_ENV}.env`)
+})
+const envConfig = {
+  // 全局请求baseURl
+  BASE_URL: process.env.BASE_URL,
+  API_KEY: process.env.API_KEY,
+  // 全局API前缀
+  PREFIX: process.env.PREFIX
+}
+export default envConfig
+```
 
 ## 数据库配置
 ```ts
@@ -132,8 +162,124 @@ export default DBConnection
 ```
 
 ## 请求统一封装
+> 实际项目中，后端服务也会调取其他service，因此整个项目统一的请求方法会有助于做请求拦截和响应拦截之类的minddware，也有利于后续维护
 
+```ts
+// @ts-nocheck
+import envConfig from '@config/env'
+import axios, {
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosRequestHeaders,
+  AxiosError
+} from 'axios'
+const Http = axios.create({
+  timeout: 20000,
+  baseURL: envConfig.BASE_URL
+})
+// 自定义请求头
+const customHeaders = {
+  Accept: 'application/json'
+}
+
+// 成功请求config处理
+const interceptorsReq = (config: AxiosRequestHeaders) => {
+  config.headers = { ...config.headers, ...customHeaders }
+  return config
+}
+
+const errorHandler = (error: any) => {
+  // 错误处理
+  console.error(error)
+}
+
+// 请求拦截处理
+// @ts-ignore
+Http.interceptors.request.use(interceptorsReq, err => {
+  errorHandler(err)
+  return Promise.reject(err?.message)
+})
+
+// 成功响应拦截处理
+const interceptorsResSuccess = <T>(response: AxiosResponse<T>) => {
+  if (
+    response.status >= 200 &&
+    response.status < 400 &&
+    response?.statusText === 'OK'
+  ) {
+    return Promise.resolve(response?.data)
+  } else {
+    errorHandler(response.status)
+    return Promise.reject()
+  }
+}
+// 响应拦截处理
+Http.interceptors.response.use(interceptorsResSuccess, (error: AxiosError) => {
+  errorHandler(error?.message)
+  return Promise.reject(error)
+})
+const httpRequest = {
+  getAPI<T = any>(
+    url: string,
+    params?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    return Http.get<T>(url, { params, ...config })
+  },
+  deleteAPI<T = any>(
+    url: string,
+    params?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    return Http.delete<T>(url, { params, ...config })
+  },
+  postAPI<T = any>(
+    url: string,
+    data?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    return Http.post<T>(url, data, { ...config })
+  },
+  putAPI<T = any>(
+    url: string,
+    data?: Record<string, any>,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    return Http.put<T>(url, data, { ...config })
+  }
+}
+export default httpRequest
+```
 ## 中间件
+
+> 实际开发中，往往会有一些诸如验证，转换数据等的需求，对于多个接口来说，我们可以采用中间件来达到这一目的
+
+```ts
+// 示范，更改全局response
+import { Request, Response, NextFunction } from 'express'
+// express中添加了第三个参数，next方法时，并可以转换为中间件，使用到此中间件的地方可以通过req来获取到当前接口的请求参数，通过res获取到当前接口的res，并通过其他逻辑来选择是否终止请求，调用next方法，接口则会继续执行
+const responseHeader = (req: Request, res: Response, next: NextFunction) => {
+  // 允许头部字段
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  // 允许公开的头部字段
+  res.header('Access-Control-Expose-Headers', 'Content-Disposition')
+  // 允许的请求方式
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+  // 允许携带cookie
+  res.header('Access-Control-Allow-Credentials', 'true')
+
+  // 预检返回204
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(204)
+  } else {
+    next()
+  }
+}
+
+export default responseHeader
+```
+
+
 
 ## 跨域请求
 > 实际项目中，考虑到负载均衡等因素，前后端往往部署在不同的服务器中，因此开发过程中，后端API需开启跨域请求，前端才可进行调试
@@ -147,8 +293,6 @@ export default DBConnection
 ## 错误处理
 helmet
 ## 参数验证
-
-## JWT
 
 ## vscode 中 debugger 调试
 ```ts
